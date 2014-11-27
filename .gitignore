@@ -15,3 +15,6 @@ classes/
 *.iml
 *.log
 *.orig
+*.jar
+*.war
+*.ear
