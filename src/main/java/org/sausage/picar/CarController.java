@@ -9,7 +9,7 @@ import javax.annotation.PreDestroy;
 /**
  * Created by weenie on 07.12.14.
  */
-//@Component
+@Component
 public class CarController implements MoveEventListener {
 
     private final MoveEventSource moveEventSource;

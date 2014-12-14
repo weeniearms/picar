@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 /**
  * Created by weenie on 07.12.14.
  */
-//@Component
+@Component
 public class CarGpioAdapter {
 
     private GpioPinDigitalOutput movePin;
