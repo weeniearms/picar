@@ -1,10 +1,13 @@
 package org.sausage.picar;
 
 import com.pi4j.io.gpio.GpioPinDigitalOutput;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by weenie on 07.12.14.
  */
+//@Component
 public class CarGpioAdapter {
 
     private GpioPinDigitalOutput movePin;
@@ -12,6 +15,7 @@ public class CarGpioAdapter {
     private GpioPinDigitalOutput turnPin;
     private GpioPinDigitalOutput turnDirectionPin;
 
+    @Autowired
     public CarGpioAdapter(GpioPinDigitalOutput movePin, GpioPinDigitalOutput moveDirectionPin,
                           GpioPinDigitalOutput turnPin, GpioPinDigitalOutput turnDirectionPin) {
         this.movePin = movePin;

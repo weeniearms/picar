@@ -1,17 +1,22 @@
 package org.sausage.picar;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 /**
  * Created by weenie on 07.12.14.
  */
+//@Component
 public class CarController implements MoveEventListener {
 
     private final MoveEventSource moveEventSource;
     private final CarGpioAdapter carGpioAdapter;
 
 
+    @Autowired
     public CarController(MoveEventSource moveEventSource, CarGpioAdapter carGpioAdapter) {
         this.moveEventSource = moveEventSource;
         this.carGpioAdapter = carGpioAdapter;

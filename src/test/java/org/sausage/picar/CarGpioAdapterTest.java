@@ -36,7 +36,7 @@ public class CarGpioAdapterTest {
     }
 
     @Parameterized.Parameters
-    public static Collection primeNumbers() {
+    public static Collection moves() {
         return Arrays.asList(new Object[][]{
                 {TestAction.FORWARD, true, false, null, null},
                 {TestAction.BACK, true, true, null, null},
