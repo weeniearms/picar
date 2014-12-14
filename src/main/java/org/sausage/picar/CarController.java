@@ -1,5 +1,7 @@
 package org.sausage.picar;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +14,7 @@ import javax.annotation.PreDestroy;
 @Component
 public class CarController implements MoveEventListener {
 
+    private static final Logger LOG = LoggerFactory.getLogger(CarController.class);
     private final MoveEventSource moveEventSource;
     private final CarGpioAdapter carGpioAdapter;
 
@@ -34,8 +37,9 @@ public class CarController implements MoveEventListener {
 
     @Override
     public void moveEventOccurred(MoveEvent moveEvent) {
-        switch (moveEvent.getMove()) {
+        LOG.info("Got move '{}' from source.", moveEvent);
 
+        switch (moveEvent.getMove()) {
             case FORWARD:
                 carGpioAdapter.forward();
                 break;
