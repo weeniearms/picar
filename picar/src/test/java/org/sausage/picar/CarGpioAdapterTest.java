@@ -20,15 +20,18 @@ public class CarGpioAdapterTest {
     private final GpioPinDigitalOutput moveDirectionPin = mock(GpioPinDigitalOutput.class);
     private final GpioPinDigitalOutput turnPin = mock(GpioPinDigitalOutput.class);
     private final GpioPinDigitalOutput turnDirectionPin = mock(GpioPinDigitalOutput.class);
-    private final TestAction action;
+    private final Turn turn;
+    private final Throttle throttle;
     private final Boolean expectedMoveState;
     private final Boolean expectedMoveDirectionState;
     private final Boolean expectedTurnState;
     private final Boolean expectedTurnDirectionState;
 
-    public CarGpioAdapterTest(TestAction action, Boolean expectedMoveState, Boolean expectedMoveDirectionState,
-                              Boolean expectedTurnState, Boolean expectedTurnDirectionState) {
-        this.action = action;
+    public CarGpioAdapterTest(Turn turn, Throttle throttle, Boolean expectedMoveState,
+                              Boolean expectedMoveDirectionState, Boolean expectedTurnState,
+                              Boolean expectedTurnDirectionState) {
+        this.turn = turn;
+        this.throttle = throttle;
         this.expectedMoveState = expectedMoveState;
         this.expectedMoveDirectionState = expectedMoveDirectionState;
         this.expectedTurnState = expectedTurnState;
@@ -38,12 +41,12 @@ public class CarGpioAdapterTest {
     @Parameterized.Parameters
     public static Collection moves() {
         return Arrays.asList(new Object[][]{
-                {TestAction.FORWARD, true, false, null, null},
-                {TestAction.BACK, true, true, null, null},
-                {TestAction.STOP, false, null, null, null},
-                {TestAction.LEFT, null, null, true, false},
-                {TestAction.RIGHT, null, null, true, true},
-                {TestAction.STRAIGHT, null, null, false, null}
+                {null, Throttle.FORWARD, true, false, null, null},
+                {null, Throttle.BACK, true, true, null, null},
+                {null, Throttle.STOP, false, null, null, null},
+                {Turn.LEFT, null, null, null, true, false},
+                {Turn.RIGHT, null, null, null, true, true},
+                {Turn.STRAIGHT, null, null, null, false, null}
         });
     }
 
@@ -53,25 +56,12 @@ public class CarGpioAdapterTest {
         CarGpioAdapter carGpioAdapter = new CarGpioAdapter(movePin, moveDirectionPin, turnPin, turnDirectionPin);
 
         // When
-        switch (action) {
-            case FORWARD:
-                carGpioAdapter.forward();
-                break;
-            case BACK:
-                carGpioAdapter.back();
-                break;
-            case STOP:
-                carGpioAdapter.stop();
-                break;
-            case LEFT:
-                carGpioAdapter.left();
-                break;
-            case RIGHT:
-                carGpioAdapter.right();
-                break;
-            case STRAIGHT:
-                carGpioAdapter.straight();
-                break;
+        if (turn != null) {
+            carGpioAdapter.setTurn(turn);
+        }
+
+        if (throttle != null) {
+            carGpioAdapter.setThrottle(throttle);
         }
 
         // Then
@@ -87,10 +77,6 @@ public class CarGpioAdapterTest {
         } else {
             verify(pin).setState(expectedPinState);
         }
-    }
-
-    public static enum TestAction {
-        FORWARD, BACK, STOP, LEFT, RIGHT, STRAIGHT
     }
 
 }

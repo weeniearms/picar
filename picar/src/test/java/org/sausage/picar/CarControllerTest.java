@@ -2,12 +2,14 @@ package org.sausage.picar;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by weenie on 09.12.14.
@@ -16,108 +18,47 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 public class CarControllerTest {
 
     @Mock
-    private MoveEventSource moveEventSource;
-
-    @Mock
     private CarGpioAdapter carGpioAdapter;
+
+    private Turn turn = Turn.RIGHT;
+
+    private Throttle throttle = Throttle.FORWARD;
 
     @InjectMocks
     private CarController carController;
 
     @Test
-    public void shouldRegisterToMoveEventSourceOnInit() {
-        // When
-        carController.init();
-
-        // Then
-        verify(moveEventSource).addMoveEventListener(carController);
-    }
-
-    @Test
-    public void shouldUnregisterFromMoveEventSourceOnTeardown() {
-        // When
-        carController.tearDown();
-
-        // Then
-        verify(moveEventSource).removeMoveEventListener(carController);
-    }
-
-    @Test
-    public void shouldGoForward() {
+    public void shouldReturnCurrentStatus() {
         // Given
-        MoveEvent move = new MoveEvent(moveEventSource, MoveEvent.Move.FORWARD);
+        when(carGpioAdapter.getThrottle()).thenReturn(throttle);
+        when(carGpioAdapter.getTurn()).thenReturn(turn);
+
 
         // When
-        carController.moveEventOccurred(move);
+        Car state = carController.state();
 
         // Then
-        verify(carGpioAdapter).forward();
-        verifyNoMoreInteractions(carGpioAdapter);
+        assertEquals(throttle, state.getThrottle());
+        assertEquals(turn, state.getTurn());
     }
 
     @Test
-    public void shouldGoBack() {
+    public void shouldUpdateGpioState() {
         // Given
-        MoveEvent move = new MoveEvent(moveEventSource, MoveEvent.Move.BACK);
+        Car state = new Car(turn, throttle);
 
         // When
-        carController.moveEventOccurred(move);
+        carController.update(state);
 
         // Then
-        verify(carGpioAdapter).back();
-        verifyNoMoreInteractions(carGpioAdapter);
-    }
+        ArgumentCaptor<Turn> turnCaptor = ArgumentCaptor.forClass(Turn.class);
+        verify(carGpioAdapter).setTurn(turnCaptor.capture());
+        assertEquals(turn, turnCaptor.getValue());
 
-    @Test
-    public void shouldStop() {
-        // Given
-        MoveEvent move = new MoveEvent(moveEventSource, MoveEvent.Move.STOP);
-
-        // When
-        carController.moveEventOccurred(move);
-
-        // Then
-        verify(carGpioAdapter).stop();
-        verifyNoMoreInteractions(carGpioAdapter);
-    }
-
-    @Test
-    public void shouldTurnLeft() {
-        // Given
-        MoveEvent move = new MoveEvent(moveEventSource, MoveEvent.Move.LEFT);
-
-        // When
-        carController.moveEventOccurred(move);
-
-        // Then
-        verify(carGpioAdapter).left();
-        verifyNoMoreInteractions(carGpioAdapter);
-    }
-
-    @Test
-    public void shouldTurnRight() {
-        // Given
-        MoveEvent move = new MoveEvent(moveEventSource, MoveEvent.Move.RIGHT);
-
-        // When
-        carController.moveEventOccurred(move);
-
-        // Then
-        verify(carGpioAdapter).right();
-        verifyNoMoreInteractions(carGpioAdapter);
-    }
-
-    @Test
-    public void shouldGoStraight() {
-        // Given
-        MoveEvent move = new MoveEvent(moveEventSource, MoveEvent.Move.STRAIGHT);
-
-        // When
-        carController.moveEventOccurred(move);
-
-        // Then
-        verify(carGpioAdapter).straight();
-        verifyNoMoreInteractions(carGpioAdapter);
+        ArgumentCaptor<Throttle> throttleCaptor = ArgumentCaptor.forClass(Throttle.class);
+        verify(carGpioAdapter).setThrottle(throttleCaptor.capture());
+        assertEquals(throttle, throttleCaptor.getValue());
     }
 
 }
+

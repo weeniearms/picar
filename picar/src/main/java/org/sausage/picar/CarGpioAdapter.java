@@ -1,6 +1,7 @@
 package org.sausage.picar;
 
 import com.pi4j.io.gpio.GpioPinDigitalOutput;
+import com.pi4j.io.gpio.PinState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,37 +28,58 @@ public class CarGpioAdapter {
         this.turnDirectionPin = turnDirectionPin;
     }
 
-    public void forward() {
-        LOG.info("Setting move forward pins.");
-        moveDirectionPin.setState(false);
-        movePin.setState(true);
+    public Turn getTurn() {
+        if (turnPin.getState().equals(PinState.LOW)) {
+            return Turn.STRAIGHT;
+        }
+
+        return turnDirectionPin.getState().equals(PinState.LOW) ? Turn.LEFT : Turn.RIGHT;
     }
 
-    public void stop() {
-        LOG.info("Setting stop pins.");
-        movePin.setState(false);
+    public void setTurn(Turn turn) {
+        LOG.info("Setting turn to {}", turn);
+
+        switch (turn) {
+
+            case LEFT:
+                turnDirectionPin.setState(false);
+                turnPin.setState(true);
+                break;
+            case STRAIGHT:
+                turnPin.setState(false);
+                break;
+            case RIGHT:
+                turnDirectionPin.setState(true);
+                turnPin.setState(true);
+                break;
+        }
     }
 
-    public void back() {
-        LOG.info("Setting move back pins.");
-        moveDirectionPin.setState(true);
-        movePin.setState(true);
+    public Throttle getThrottle() {
+        if (movePin.getState().equals(PinState.LOW)) {
+            return Throttle.STOP;
+        }
+
+        return moveDirectionPin.getState().equals(PinState.LOW) ? Throttle.FORWARD : Throttle.BACK;
     }
 
-    public void left() {
-        LOG.info("Setting turn left pins.");
-        turnDirectionPin.setState(false);
-        turnPin.setState(true);
+    public void setThrottle(Throttle throttle) {
+        LOG.info("Setting throttle to {}", throttle);
+
+        switch (throttle) {
+
+            case FORWARD:
+                moveDirectionPin.setState(false);
+                movePin.setState(true);
+                break;
+            case STOP:
+                movePin.setState(false);
+                break;
+            case BACK:
+                moveDirectionPin.setState(true);
+                movePin.setState(true);
+                break;
+        }
     }
 
-    public void right() {
-        LOG.info("Setting turn right pins.");
-        turnDirectionPin.setState(true);
-        turnPin.setState(true);
-    }
-
-    public void straight() {
-        LOG.info("Setting straight pins.");
-        turnPin.setState(false);
-    }
 }
