@@ -17,6 +17,7 @@
 
     <modules>
         <module>picar</module>
+	<module>picar-web</module>
     </modules>
 
     <properties>
@@ -25,6 +26,14 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- module dependencies -->
+            <dependency>
+                <groupId>org.sausage</groupId>
+                <artifactId>picar</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- external dependencies -->
             <dependency>
                 <groupId>com.pi4j</groupId>
                 <artifactId>pi4j-core</artifactId>

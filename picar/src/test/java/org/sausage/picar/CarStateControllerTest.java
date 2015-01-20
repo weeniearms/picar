@@ -15,7 +15,7 @@ import static org.mockito.Mockito.when;
  * Created by weenie on 09.12.14.
  */
 @RunWith(MockitoJUnitRunner.class)
-public class CarControllerTest {
+public class CarStateControllerTest {
 
     @Mock
     private CarGpioAdapter carGpioAdapter;
@@ -25,7 +25,7 @@ public class CarControllerTest {
     private Throttle throttle = Throttle.FORWARD;
 
     @InjectMocks
-    private CarController carController;
+    private CarStateController carStateController;
 
     @Test
     public void shouldReturnCurrentStatus() {
@@ -35,7 +35,7 @@ public class CarControllerTest {
 
 
         // When
-        Car state = carController.state();
+        CarState state = carStateController.current();
 
         // Then
         assertEquals(throttle, state.getThrottle());
@@ -45,10 +45,10 @@ public class CarControllerTest {
     @Test
     public void shouldUpdateGpioState() {
         // Given
-        Car state = new Car(turn, throttle);
+        CarState state = new CarState(turn, throttle);
 
         // When
-        carController.update(state);
+        carStateController.update(state);
 
         // Then
         ArgumentCaptor<Turn> turnCaptor = ArgumentCaptor.forClass(Turn.class);

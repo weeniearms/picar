@@ -1,8 +1,9 @@
-package org.sausage.picar;
+package org.sausage.picar.web;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.sausage.picar.CarState;
 
 /**
  * Created by weenie on 20.01.15.
@@ -10,10 +11,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Car {
+public class CarStateSequenceItem {
 
-    private Turn turn;
-
-    private Throttle throttle;
+    private CarState state;
+    private int duration;
 
 }
