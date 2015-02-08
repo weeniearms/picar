@@ -1,0 +1,24 @@
+<div ng-controller="driveCtrl" layout="row" layout-align="space-around center">
+    <div layout="row" layout-align="space-around center">
+        <md-button class="md-fab" aria-label="Left" style="margin: 8px;" ng-disabled="isLeft" ng-click="left()">
+            <md-icon icon="/app/img/icons/ic_left_512px.svg" style="width: 32px; height: 32px;"></md-icon>
+        </md-button>
+        <md-button class="md-fab" aria-label="Right" style="margin: 8px;" ng-disabled="!isLeft && !isRight" ng-click="straight()">
+            .
+        </md-button>
+        <md-button class="md-fab" aria-label="Right" style="margin: 8px;" ng-disabled="isRight" ng-click="right()">
+            <md-icon icon="/app/img/icons/ic_right_512px.svg" style="width: 32px; height: 32px;"></md-icon>
+        </md-button>
+    </div>
+    <div layout="column" layout-align="space-around center">
+        <md-button class="md-fab" aria-label="Forward" style="margin: 8px;" ng-disabled="isForward" ng-click="forward()">
+            <md-icon icon="/app/img/icons/ic_up_512px.svg" style="width: 32px; height: 32px;"></md-icon>
+        </md-button>
+        <md-button class="md-fab" aria-label="Forward" style="margin: 8px;" ng-disabled="!isForward && !isBack" ng-click="stop()">
+            .
+        </md-button>
+        <md-button class="md-fab" aria-label="Back" style="margin: 8px;" ng-disabled="isBack" ng-click="back()">
+            <md-icon icon="/app/img/icons/ic_down_512px.svg" style="width: 32px; height: 32px;"></md-icon>
+        </md-button>
+    </div>
+</div>

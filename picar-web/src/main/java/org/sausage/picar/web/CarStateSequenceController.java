@@ -17,7 +17,7 @@ import java.util.concurrent.Executors;
  * Created by weenie on 20.01.15.
  */
 @Controller
-@RequestMapping("/sequence")
+@RequestMapping("/api/sequence")
 public class CarStateSequenceController {
 
     private static final Logger LOG = LoggerFactory.getLogger(CarStateSequenceController.class);

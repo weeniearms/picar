@@ -16,7 +16,7 @@ import org.springframework.web.client.RestTemplate;
  * Created by weenie on 20.01.15.
  */
 @Controller
-@RequestMapping("/car")
+@RequestMapping("/api/car")
 public class CarStateController {
 
     private static final Logger LOG = LoggerFactory.getLogger(CarStateController.class);

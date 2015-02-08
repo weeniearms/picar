@@ -1,0 +1,29 @@
+<div ng-controller="sequenceCtrl">
+    <div layout="column">
+        <md-list>
+            <md-item ng-repeat="it in items">
+                <md-item-content>
+                    <div layout="row">
+                        <select name="turn" ng-model="it.state.turn" style="margin: 5px;">
+                            <option>LEFT</option>
+                            <option>STRAIGHT</option>
+                            <option>RIGHT</option>
+                        </select>
+                        <select name="throttle" ng-model="it.state.throttle" style="margin: 5px;">
+                            <option>FORWARD</option>
+                            <option>STOP</option>
+                            <option>BACK</option>
+                        </select>
+                        <input name="duration" type="number" step="any" min="100" max="5000" ng-model="it.duration" style="margin: 5px; width: 70px;" />
+                    </div>
+                </md-item-content>
+
+            </md-item>
+        </md-list>
+        <div layout="row">
+            <md-button class="md-raised md-primary" ng-click="sendItems()" style="margin: 5px;">Send</md-button>
+            <md-button class="md-raised" ng-click="addItem()" style="margin: 5px;">Add</md-button>
+            <md-button class="md-raised" ng-click="removeItem()" style="margin: 5px;">Remove</md-button>
+        </div>
+    </div>
+</div>
