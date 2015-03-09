@@ -1,2 +1,2 @@
 #!/bin/sh
-sshpass -p raspberry scp target/picar-1.0-SNAPSHOT-exec.jar pi@192.168.1.106:~
+sshpass -p raspberry scp target/picar-exec.jar pi@192.168.1.106:~
