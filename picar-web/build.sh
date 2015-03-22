@@ -2,6 +2,6 @@
 
 mvn clean install -f ../pom.xml
 
-docker build --rm --tag=weenie/picar-web .
+sudo docker build --rm --tag=weenie/picar-web .
 
 
