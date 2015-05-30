@@ -1,9 +1,9 @@
-package org.sausage.picar.web;
+package com.github.weeniearms.picar.web;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.sausage.picar.CarState;
+import com.github.weeniearms.picar.CarState;
 
 /**
  * Created by weenie on 20.01.15.

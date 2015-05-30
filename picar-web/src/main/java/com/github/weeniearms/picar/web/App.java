@@ -1,4 +1,4 @@
-package org.sausage.picar.web;
+package com.github.weeniearms.picar.web;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

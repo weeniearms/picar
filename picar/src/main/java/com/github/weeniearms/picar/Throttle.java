@@ -1,4 +1,4 @@
-package org.sausage.picar;
+package com.github.weeniearms.picar;
 
 /**
  * Created by weenie on 20.01.15.

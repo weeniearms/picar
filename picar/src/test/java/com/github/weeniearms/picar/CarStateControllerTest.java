@@ -1,4 +1,4 @@
-package org.sausage.picar;
+package com.github.weeniearms.picar;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

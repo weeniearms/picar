@@ -1,4 +1,4 @@
-package org.sausage.picar;
+package com.github.weeniearms.picar;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

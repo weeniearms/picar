@@ -1,4 +1,4 @@
-package org.sausage.picar;
+package com.github.weeniearms.picar;
 
 import com.pi4j.io.gpio.*;
 import org.springframework.boot.SpringApplication;

@@ -1,7 +1,7 @@
-package org.sausage.picar.web;
+package com.github.weeniearms.picar.web;
 
 import org.junit.Test;
-import org.sausage.picar.CarState;
+import com.github.weeniearms.picar.CarState;
 import org.springframework.web.client.RestTemplate;
 
 import static org.junit.Assert.assertEquals;

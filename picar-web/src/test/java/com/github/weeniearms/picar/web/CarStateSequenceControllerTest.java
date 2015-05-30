@@ -1,4 +1,4 @@
-package org.sausage.picar.web;
+package com.github.weeniearms.picar.web;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -6,9 +6,9 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.sausage.picar.CarState;
-import org.sausage.picar.Throttle;
-import org.sausage.picar.Turn;
+import com.github.weeniearms.picar.CarState;
+import com.github.weeniearms.picar.Throttle;
+import com.github.weeniearms.picar.Turn;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;

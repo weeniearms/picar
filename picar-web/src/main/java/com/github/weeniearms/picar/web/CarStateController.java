@@ -1,6 +1,6 @@
-package org.sausage.picar.web;
+package com.github.weeniearms.picar.web;
 
-import org.sausage.picar.CarState;
+import com.github.weeniearms.picar.CarState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
